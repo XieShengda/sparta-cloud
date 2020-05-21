@@ -1,0 +1,5 @@
+spring:
+  profiles:
+    active: @profiles.active@
+authentication:
+  enable-multi-login: true #多端登录

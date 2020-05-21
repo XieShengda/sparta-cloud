@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="sparta-user" />
+        <module name="sparta-portal" />
+        <module name="sparta-security" />
+        <module name="sparta-core" />
+        <module name="sparta-system" />
+        <module name="sparta-gateway" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="sparta-cloud" target="1.8" />
+      <module name="sparta-consul" target="1.8" />
+      <module name="sparta-core" target="1.8" />
+      <module name="sparta-gateway" target="1.8" />
+      <module name="sparta-portal" target="1.8" />
+      <module name="sparta-security" target="1.8" />
+      <module name="sparta-system" target="1.8" />
+      <module name="sparta-user" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="sparta-cloud" options="-parameters" />
+      <module name="sparta-consul" options="-parameters" />
+      <module name="sparta-core" options="-parameters" />
+      <module name="sparta-gateway" options="-parameters" />
+      <module name="sparta-portal" options="-parameters" />
+      <module name="sparta-security" options="-parameters" />
+      <module name="sparta-system" options="-parameters" />
+      <module name="sparta-user" options="-parameters" />
+    </option>
+  </component>
+</project>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/sparta-cloud.iml" filepath="$PROJECT_DIR$/sparta-cloud.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sparta-core/sparta-core.iml" filepath="$PROJECT_DIR$/sparta-core/sparta-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sparta-gateway/sparta-gateway.iml" filepath="$PROJECT_DIR$/sparta-gateway/sparta-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sparta-portal/sparta-portal.iml" filepath="$PROJECT_DIR$/sparta-portal/sparta-portal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sparta-security/sparta-security.iml" filepath="$PROJECT_DIR$/sparta-security/sparta-security.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sparta-system/sparta-system.iml" filepath="$PROJECT_DIR$/sparta-system/sparta-system.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sparta-user/sparta-user.iml" filepath="$PROJECT_DIR$/sparta-user/sparta-user.iml" />
+    </modules>
+  </component>
+</project>

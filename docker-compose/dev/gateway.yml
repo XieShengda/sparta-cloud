@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  gateway:
+    container_name: gateway
+    deploy:
+      mode: 'replicated'
+      replicas: 3
+    build:
+      context: ../../sparta-gateway
+    external_links:
+      - consul
+    ports:
+      - 8080:8080
+    environment:
+      SHARD_ID: 1
+      SPRING_PROFILES_ACTIVE: dev
+      TZ: Asia/Shanghai

@@ -1,0 +1,46 @@
+meta:
+  shard-id: ${SHARD_ID:0}
+  max-next: 0xFFFF
+
+spring:
+  redis:
+    database: 0
+    host: redis
+    port: 6379
+    password: root
+    timeout: 5000
+    lettuce:
+      pool:
+        max-wait: -1
+        max-active: 1000
+        max-idle: 100
+        min-idle: 50
+  datasource:
+    druid:
+      url: jdbc:mysql://mysql:3306/sparta?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&allowPublicKeyRetrieval=true&verifyServerCertificate=false&useSSL=false&allowMultiQueries=true
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: root
+      initial-size: 10
+      max-active: 50
+      min-idle: 10
+      max-wait: 60000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      validation-query: SELECT 1 FROM DUAL
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: true
+      time-between-eviction-runs-millis: 60000
+      filters: stat,wall
+      connection-init-sqls: set names utf8mb4
+
+mybatis-plus:
+  mapper-locations: classpath*:com/sender/sparta/**/xml/*.xml
+  typeAliasesPackage: com.sender.sparta.persistent.po
+  type-handlers-package: com.sender.sparta.config.mybatis
+  configuration:
+    lazyLoadingEnabled: true #延时加载的开关
+    multipleResultSetsEnabled: true #开启的话，延时加载一个属性时会加载该对象全部属性，否则按需加载属性
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #打印sql语句,调试用
+    use-actual-param-name: true
