@@ -1,9 +1,9 @@
 package com.sender.sparta.config;
 
-import com.sender.sparta.constant.TokenConfig;
 import com.sender.sparta.constant.TokenHashKey;
 import com.sender.sparta.constant.TokenKey;
-import com.sender.sparta.service.RedisService;
+import com.sender.sparta.core.service.RedisService;
+import com.sender.sparta.security.constant.TokenConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.userdetails.UserDetails;

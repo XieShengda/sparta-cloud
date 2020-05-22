@@ -10,9 +10,9 @@ public enum UserStatusEnum {
     FROZEN(1),
     DISABLE(2),
     ;
-    int code;
+    Integer code;
 
-    UserStatusEnum(int code) {
+    UserStatusEnum(Integer code) {
         this.code = code;
     }
 }

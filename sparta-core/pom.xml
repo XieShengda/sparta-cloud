@@ -12,7 +12,6 @@
     <name>sparta-core</name>
     <description>core project for sparta</description>
 
-
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

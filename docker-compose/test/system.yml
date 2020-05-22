@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  system:
+    container_name: system
+    build:
+      context: ../../sparta-system
+    external_links:
+      - consul
+      - mysql
+      - redis
+    expose:
+      - 8080
+    environment:
+      SHARD_ID: 1
+      SPRING_PROFILES_ACTIVE: test
+      TZ: Asia/Shanghai

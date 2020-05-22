@@ -3,10 +3,10 @@ package com.sender.sparta.service.impl;
 import cn.hutool.core.util.RandomUtil;
 import com.sender.sparta.config.properties.AuthenticationProperties;
 import com.sender.sparta.constant.TokenKey;
-import com.sender.sparta.service.AsyncService;
-import com.sender.sparta.service.RedisService;
+import com.sender.sparta.core.service.AsyncService;
+import com.sender.sparta.core.service.RedisService;
+import com.sender.sparta.core.util.RequestHolder;
 import com.sender.sparta.service.TokenService;
-import com.sender.sparta.util.RequestHolder;
 import com.sender.sparta.web.pojo.TokenBean;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -18,11 +18,11 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-import static com.sender.sparta.constant.TokenConfig.HEADER;
-import static com.sender.sparta.constant.TokenConfig.TOKEN_EXPIRED_DAYS;
 import static com.sender.sparta.constant.TokenHashKey.SECRET_KEY;
 import static com.sender.sparta.constant.TokenHashKey.USERNAME;
 import static com.sender.sparta.constant.TokenKey.USER_PREFIX;
+import static com.sender.sparta.security.constant.TokenConfig.HEADER;
+import static com.sender.sparta.security.constant.TokenConfig.TOKEN_EXPIRED_DAYS;
 
 /**
  * 登录：
@@ -48,7 +48,7 @@ public class TokenServiceImpl implements TokenService {
      */
     @Override
     public TokenBean create(UserDetails userDetails) {
-        if (!authenticationProperties.enableMultiLogin()) {
+        if (!authenticationProperties.getEnableMultiLogin()) {
             remove(userDetails);
         }
 

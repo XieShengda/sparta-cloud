@@ -1,7 +1,7 @@
 package com.sender.sparta;
 
-import com.sender.sparta.config.properties.MetaProperties;
-import com.sender.sparta.generator.Snowflake;
+import com.sender.sparta.core.config.properties.MetaProperties;
+import com.sender.sparta.core.generator.Snowflake;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

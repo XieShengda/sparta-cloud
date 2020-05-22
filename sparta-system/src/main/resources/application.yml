@@ -1,1 +1,10 @@
+spring:
+  profiles:
+    active: @profiles.active@
 
+sms:
+  title: CMe
+  pattern: '【${sms.title}】验证码 {0}, ${sms.expire-minute}分钟内有效'
+  dev-code: '0000'
+  dev-msg-id: '000'
+  expire-minutes: 5

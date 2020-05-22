@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  consul:
+    image: 'consul'
+    container_name: consul
+    command: agent -server -bootstrap -node=node1 -bind=0.0.0.0 -client=0.0.0.0 -datacenter=dc1 -ui
+    restart: always
+    ports:
+      - 8500:8500
+    volumes:
+      - ${BASE_VOLUME}/consul/data:/consul/data
+
+  mysql:
+    image: 'mysql'
+    container_name: mysql
+    command:
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_general_ci
+      --explicit_defaults_for_timestamp=false
+    restart: always
+    environment:
+      TZ: Asia/Shanghai
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 3306:3306
+    volumes:
+      - ${BASE_VOLUME}/mysql/data:/var/lib/mysql
+      - ${BASE_VOLUME}/mysql/config:/etc/mysql/conf.d
+
+  redis:
+    image: 'redis:alpine'
+    container_name: redis
+    command: redis-server --requirepass root --notify-keyspace-events Ex
+    restart: always
+    expose:
+      - 6379
+    volumes:
+      - ${BASE_VOLUME}/redis:/var/lib/redis
+      - ${BASE_VOLUME}/redis/config/redis.conf:/usr/local/etc/redis/redis.conf
+      - ${BASE_VOLUME}/redis/data:/data
+    environment:
+      - REDIS_REPLICATION_MODE=master
+
+  rabbitmq:
+    image: rabbitmq:3.8.3-management
+    container_name: rabbitmq
+    expose:
+      - 5672
+    ports:
+      - 15672:15672
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    volumes:
+      - ${BASE_VOLUME}/rabbitmq:/var/lib/rabbitmq

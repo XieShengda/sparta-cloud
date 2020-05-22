@@ -1,23 +1,18 @@
 package com.sender.sparta.web.controller;
 
-import com.sender.sparta.service.SecurityProxy;
+import com.sender.sparta.core.vo.ResponseModel;
+import com.sender.sparta.security.service.SecurityProxy;
 import com.sender.sparta.service.UserService;
+import com.sender.sparta.web.dto.LoginDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.Valid;
 
-@Api("用户")
+@Api(tags = "用户")
 @RestController
 @RequestMapping("users")
 @AllArgsConstructor
@@ -27,10 +22,8 @@ public class UserController {
 
     @PostMapping("login")
     @ApiOperation("短信登录")
-    public Object login(@NotBlank @Pattern(regexp = "^1[0-9]{10}$", message = "手机号格式不正确") @ApiParam("手机号") String mobile,
-                        @NotBlank @Size(max = 6, message = "短信验证码长度不符") @ApiParam("验证码") String validCode,
-                        @NotBlank @ApiParam("消息id") String msgId) {
-        return ResponseEntity.ok(userService.login(mobile, validCode, msgId));
+    public Object login(@RequestBody @Valid LoginDTO body) {
+        return ResponseModel.ok(userService.login(body));
     }
 
     @DeleteMapping("logout")
@@ -38,7 +31,7 @@ public class UserController {
     public Object logout() {
         UserDetails userDetails = SecurityProxy.userDetail();
         userService.logout(userDetails);
-        return ResponseEntity.ok();
+        return ResponseModel.ok();
     }
 
 }

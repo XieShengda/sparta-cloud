@@ -2,15 +2,15 @@ package com.sender.sparta.service.impl;
 
 import cn.hutool.core.util.RandomUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.sender.sparta.exception.ApiException;
-import com.sender.sparta.exception.ConflictException;
-import com.sender.sparta.generator.Snowflake;
+import com.sender.sparta.core.exception.ApiException;
+import com.sender.sparta.core.exception.ConflictException;
 import com.sender.sparta.persistent.dao.SpartaUserMapper;
 import com.sender.sparta.persistent.po.SpartaUser;
-import com.sender.sparta.service.RedisService;
+import com.sender.sparta.core.service.RedisService;
 import com.sender.sparta.service.TokenService;
 import com.sender.sparta.service.UserService;
-import com.sender.sparta.util.RequestHolder;
+import com.sender.sparta.core.util.RequestHolder;
+import com.sender.sparta.web.dto.LoginDTO;
 import com.sender.sparta.wrapper.UserWrapper;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,13 +27,13 @@ public class UserServiceImpl implements UserService {
     private final SpartaUserMapper spartaUserMapper;
 
     @Override
-    public Object login(String mobile, String validCode, String msgId) {
+    public Object login(LoginDTO body) {
 
-        if (!verify(mobile, validCode, msgId)) {
+        if (!verify(body.getMobile(), body.getValidCode(), body.getMsgId())) {
             ConflictException.abort();
         }
         // 判断手机号是否注册
-        SpartaUser spartaUser = spartaUserMapper.selectOne(Wrappers.<SpartaUser>lambdaQuery().eq(SpartaUser::getMobile, mobile));
+        SpartaUser spartaUser = spartaUserMapper.selectOne(Wrappers.<SpartaUser>lambdaQuery().eq(SpartaUser::getMobile, body.getMobile()));
         if (spartaUser == null) {
             // 插入用户
             String inviteCode = RandomUtil.randomStringUpper(6);
@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
             }
             spartaUser = new SpartaUser()
                     .setNickname("用户".concat(RandomUtil.randomStringUpper(6)))
-                    .setMobile(mobile)
+                    .setMobile(body.getMobile())
                     .setInviteCode(inviteCode)
                     .setLastLoginTime(new Date())
                     .setLastLoginIp(RequestHolder.clientIP());
